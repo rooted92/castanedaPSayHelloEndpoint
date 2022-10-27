@@ -8,20 +8,21 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using castanedaPSayHelloEndpoint.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace castanedaPSayHelloEndpoint.Controllers
 {
+    [ApiController]
     [Route("[controller]")]
-    public class SayHelloController : Controller
+    public class SayHelloController : ControllerBase
     {
-        [HttpGet]
-        [Route("Hello/{name}")]
-        public string SayHello(string name)
+        [HttpGet("Hello")]
+        public string SayHello(SayHelloModel name)
         {
-            bool checkWord = name.All(Char.IsLetter);
-            string result = $"Hello {name}, nice to meet you!";
+            bool checkWord = name.input.All(Char.IsLetter);
+            string result = $"Hello {name.input}, nice to meet you!";
             if(!checkWord)
             {
                 result = "Invalid Entry";
